@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>DOM2級事件處理程序</title>
+	<style>
+		#box{
+			width:200px;
+			height: 200px;
+			background-color:red;
+		}	
+	</style>
+</head>
+<body>
+	<div id="box"></div>
+	<script type="text/javascript">
+		// DOM2級事件中央處理程序:
+		//布爾值默認為false是處在冒泡階段，如果為true是處在捕獲階段
+		//addEventListener(事件名，處理程序的函數，布爾值) removerEventListener()
+		var box = document.getElementById('box');
+		//IE8瀏覽器不支持DOM2級事件處理程序
+		/* setTimeout (function(){
+			box.addEventListener('click',function(){
+				this.innerHTML += 1;
+			},false);
+		},10);
+		//監聽函數傳參，可以用匿名函數包裝一個監聽函數
+		box.addEventListener('click',function(){
+			test(1111);
+
+		},false);
+		
+		function test(x){
+			alert(x);
+		}
+			
+
+		*/
+
+		//無效的移除事件方式
+
+		//添加事件監聽者
+		/*
+			box.addEventListener('click',function(){
+				this.innerHTML +=1;
+			},false);
+			//移除一下
+			box.removeEventListener('click',function(){
+				this.innerHTML +=1;
+			},false);
+
+		*/
+
+		//正確移除事件方式
+		function handler(){
+			this.innerHTML +=1;
+
+		}
+		box.addEventListener('click',handler,false);
+		box.removerEventListener('click',handler,false);
+		
+	</script>
+</body>
+</html>
